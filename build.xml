@@ -62,7 +62,7 @@
       <path path="${givwenzen.lib.dir}/dom4j-1.6.1.jar"/>
       <path path="${givwenzen.lib.dir}/slf4j-api-1.7.30.jar"/>
       <path path="${givwenzen.lib.dir}/slf4j-simple-1.7.30.jar"/>
-      <path path="${givwenzen.lib.dir}/fitnesse-20200501.jar"/>
+      <path path="${givwenzen.lib.dir}/fitnesse-20221219.jar"/>
       <path path="${givwenzen.lib.dir}/velocity-engine-core-2.2.jar"/>
       <path path="${givwenzen.lib.dir}/json-20190722.jar"/>
       <path path="${givwenzen.lib.dir}/lucene-core-8.6.0.jar"/>
@@ -243,17 +243,17 @@
 
    <target name="execute-fitnesse-tests"
            description="NOT READY - DO NOT USE FOR BUILD MACHINE - SERVERLESS FITNESSE RUNNER">
-      <java jar="lib/fitnesse-20200501.jar" failonerror="true" fork="true"
+      <java jar="lib/fitnesse-20221219.jar" failonerror="true" fork="true"
             output="${givwenzen.target.dir}/gwz-slim-examples-results.xml">
          <arg value="-c"/>
          <arg value="SlimExamples?suite&amp;format=xml"/>
       </java>
-      <java jar="lib/fitnesse-20200501.jar" failonerror="true" fork="true"
+      <java jar="lib/fitnesse-20221219.jar" failonerror="true" fork="true"
             output="${givwenzen.target.dir}/gwz-tests-results.xml">
          <arg value="-c"/>
          <arg value="GWZTests?suite&amp;format=xml"/>
       </java>
-      <java jar="lib/fitnesse-20200501.jar" failonerror="true" fork="true"
+      <java jar="lib/fitnesse-20221219.jar" failonerror="true" fork="true"
             output="${givwenzen.target.dir}/gwz-fitlibrary-examples-results.xml">
          <arg value="-c"/>
          <arg value="FitLibraryExamples?suite&amp;format=xml"/>
@@ -271,7 +271,7 @@
 
 
    <target name="zip" description="create the release zip file">
-      
+
       <macrodef name = "git">
          <attribute name = "command" />
          <attribute name = "dir" default = "" />
@@ -284,7 +284,7 @@
             </exec>
          </sequential>
       </macrodef>
-      
+
       <macrodef name = "git-clone-pull">
          <attribute name = "repository" />
          <attribute name = "dest" />
@@ -298,7 +298,7 @@
             <git command = "pull" dir = "@{dest}" />
          </sequential>
       </macrodef>
-      
+
       <git-clone-pull repository="https://github.com/weswilliams/GivWenZen.git" dest="${zip.temp.dir}"/>
 
       <copy todir="${zip.temp.dir}/target">

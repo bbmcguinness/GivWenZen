@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.givwenzen.GivWenZen;
+import org.givwenzen.IgnoreAllTestsGivWenZenException;
+import org.givwenzen.IgnoreScriptTestGivWenZenException;
 import org.givwenzen.annotations.DomainStep;
 import org.givwenzen.annotations.DomainSteps;
 
@@ -80,8 +82,20 @@ public class SimpleTestSteps {
     throw new StopTestExceptionForTesting("stop test example");
   }
 
-  @DomainStep("simple step returns true")
+  @DomainStep("a simple step returns true")
   public boolean returnTrue(){
     return true;
   }
+
+  @DomainStep("another simple step that throws an exception that should ignore the rest of that test")
+  public String throwIgnoreException() throws IgnoreScriptTestGivWenZenException {
+    throw new IgnoreScriptTestGivWenZenException("Ignoring test example");
+  }
+
+  @DomainStep("another simple step that throws an exception that should ignore all subsequent tests")
+  public String throwIgnoreAllException() throws IgnoreAllTestsGivWenZenException {
+    throw new IgnoreAllTestsGivWenZenException("Ignoring all tests example");
+  }
+
+
 }

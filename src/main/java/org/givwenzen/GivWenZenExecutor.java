@@ -6,8 +6,7 @@ import org.givwenzen.annotations.MarkedClass;
 import java.util.List;
 import java.util.Set;
 
-import static fitnesse.slim.SlimException.isStopSuiteException;
-import static fitnesse.slim.SlimException.isStopTestException;
+import static fitnesse.slim.SlimException.*;
 
 public class GivWenZenExecutor implements GivWenZen {
     DomainStepMethodLocator methodLocator;
@@ -62,6 +61,7 @@ public class GivWenZenExecutor implements GivWenZen {
             methodLocator = new DomainStepMethodLocator(stepDefinitions, customParserFinder);
         } catch (Throwable e) { // NOSONAR
             checkExceptionForStop(e);
+            checkExceptionForIgnore(e);
             throw new GivWenZenException(e);
         }
     }
@@ -117,6 +117,12 @@ public class GivWenZenExecutor implements GivWenZen {
 
     private void checkExceptionForStop(Throwable exception) {
         if (isStopTestException(exception) || isStopSuiteException(exception)) {
+            stopRequested = true;
+        }
+    }
+
+    private void checkExceptionForIgnore(Throwable exception) {
+        if (isIgnoreScriptTestException(exception) || isIgnoreAllTestsException(exception)) {
             stopRequested = true;
         }
     }
