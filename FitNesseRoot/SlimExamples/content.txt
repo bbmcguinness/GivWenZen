@@ -10,6 +10,7 @@
 
 !path ./target/classes
 !path ./target/examples
+!path ./target/test-classes
 
 !path ./lib/commons-logging-1.2.jar
 !path ./lib/javassist-3.27.0-GA.jar

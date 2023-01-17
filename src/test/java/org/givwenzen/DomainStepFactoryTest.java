@@ -63,6 +63,38 @@ public class DomainStepFactoryTest {
   }
 
   @Test
+  public void testThrowsIgnoreScriptTestException() throws Exception {
+    ArrayList<String> list = new ArrayList<String>();
+    executor = GivWenZenExecutorCreator.instance()
+            .customStepState(list)
+            .stepClassBasePackage("bdd.")
+            .create();
+    try {
+      executor.given("another simple step that throws an exception that should ignore the rest of that test");
+      fail("should throw exception");
+    } catch (Exception e) {
+      assertTrue(e.toString().contains("Ignoring test example"));
+      assertTrue(e.getClass().getName().contains("IgnoreScriptTestGivWenZenException"));
+    }
+  }
+
+  @Test
+  public void testThrowsIgnoreAllTestsException() throws Exception {
+    ArrayList<String> list = new ArrayList<String>();
+    executor = GivWenZenExecutorCreator.instance()
+            .customStepState(list)
+            .stepClassBasePackage("bdd.")
+            .create();
+    try {
+      executor.given("another simple step that throws an exception that should ignore all subsequent tests");
+      fail("should throw exception");
+    } catch (Exception e) {
+      assertTrue(e.toString().contains("Ignoring all tests example"));
+      assertTrue(e.getClass().getName().contains("IgnoreAllTestsGivWenZenException"));
+    }
+  }
+
+  @Test
   public void testFindStepsWithInterfaceParameterConstructor() throws Exception {
     String stepClassName = StepClassWithInterfaceConstructorForUnitTesting.class.getName();
     String constructorObjectClassName = SerializableClassForConstructorTest.class.getName();

@@ -1,0 +1,21 @@
+---
+Test
+---
+-|script|
+|given|a simple step returns true                                                           |
+|when |another simple step that throws an exception that should ignore the rest of that test|
+|then |this step doesn't get run                                                            |
+
+
+-|script|
+|given|a simple step returns true|
+
+-|script|
+|given|a simple step returns true                                                          |
+|when |another simple step that throws an exception that should ignore all subsequent tests|
+|then |this step doesn't get run                                                           |
+
+-|script|
+|given|this step doesn't get run|
+|when |this step doesn't get run|
+|then |this step doesn't get run|

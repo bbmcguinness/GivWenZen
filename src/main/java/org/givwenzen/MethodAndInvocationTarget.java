@@ -31,6 +31,12 @@ public class MethodAndInvocationTarget {
             if(e.getTargetException().getClass().getName().contains("StopTest")){
                 String errorMsg = e.getTargetException().getClass().getName() + ": " + e.getTargetException().toString();
                 throw new StopTestGivWenZenException(errorMsg);
+            } else if (e.getTargetException().getClass().getName().contains("IgnoreScriptTest")){
+                String errorMsg = e.getTargetException().getClass().getName() + ": " + e.getTargetException().toString();
+                throw new IgnoreScriptTestGivWenZenException(errorMsg);
+            } else if (e.getTargetException().getClass().getName().contains("IgnoreAll")){
+                String errorMsg = e.getTargetException().getClass().getName() + ": " + e.getTargetException().toString();
+                throw new IgnoreAllTestsGivWenZenException(errorMsg);
             } else {
                 throw new GivWenZenExecutionException(buildExceptionMessage("Error while executing step", methodString), e);
             }
